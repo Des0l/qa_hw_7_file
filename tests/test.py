@@ -12,7 +12,7 @@ def test_pdf_file(ARCHIVE_FILE_PATH):
             pdf_reader = PdfReader(pdf_file)
 
             # Проверка количества страниц
-            assert len(pdf_reader.pages) == 5, "Должно быть 5 страниц"
+            assert len(pdf_reader.pages) == 5
 
             # Проверка текста на всех страницах
             text = "".join(page.extract_text() for page in pdf_reader.pages)
@@ -27,10 +27,8 @@ def test_csv_file(ARCHIVE_FILE_PATH):
             csv_data = list(csv_reader)
 
             # Проверки структуры
-            assert len(csv_data) == 78, "Должно быть 78 строк"
-            assert all(
-                len(row) == 2 for row in csv_data
-            ), "Все строки должны иметь 2 колонки"
+            assert len(csv_data) == 78
+            assert all(len(row) == 2 for row in csv_data)
 
             # Поиск слова из файла
             found = any("Привет" in cell for row in csv_data for cell in row)
@@ -45,8 +43,8 @@ def test_xlsx_file(ARCHIVE_FILE_PATH):
             sheet = wb.active
 
             # Проверки структуры
-            assert sheet.max_row == 88, "Должно быть 88 строк"
-            assert sheet.max_column == 2, "Должно быть 2 колонки"
+            assert sheet.max_row == 88
+            assert sheet.max_column == 2
 
             # Проверка n-й строки
             row_21 = str([cell.value for cell in sheet["21"]])
